@@ -188,7 +188,10 @@ read i
 
 msg change the deployment:
 msg
-msg kubectl set image deployments/$deployment $deployment=$IMAGE:v4
+msg kubectl set image deployments/$deployment $deployment=$IMAGE:v4 --record=true
+msg
+msg you can modify the change cause:
+msg kubectl annotate deployments/$deployment kubernetes.io/change-cause="crazy tag"
 msg
 msg check error:
 msg
@@ -204,7 +207,7 @@ msg kubectl describe pod hello-web-5fdd857868-4tbb5
 msg
 msg fix error:
 msg
-msg kubectl set image deployments/$deployment $deployment=$IMAGE:0.4
+msg kubectl set image deployments/$deployment $deployment=$IMAGE:0.4 --record=true
 msg
 msg kubectl get pod
 msg
@@ -221,7 +224,11 @@ msg check revisions:
 msg
 msg kubectl rollout history deployments
 msg
-msg 'rollback to specific revision 3 (default is 0 -- last revision)'
+msg look at specific revision:
+msg
+msg kubectl rollout history deployments/$deployment --revision=2
+msg
+msg 'rollback to specific revision 3 (default is 0 -- last revision):'
 msg
 msg kubectl rollout undo deployments/$deployment --to-revision=3
 msg
