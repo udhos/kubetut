@@ -18,7 +18,8 @@ run() {
 }
 
 ZONE=us-central1-a
-IMAGE=docker.io/udhos/web-scratch:latest
+IMAGE_BASE=docker.io/udhos/web-scratch
+IMAGE=$IMAGE_BASE:latest
 
 msg forcing ZONE=$ZONE
 msg forcing IMAGE=$IMAGE
@@ -184,6 +185,32 @@ msg kubectl delete hpa $hpa
 msg
 msg hit ENTER to continue
 read i
+
+msg change the deployment:
+msg
+msg kubectl set image deployments/$deployment $deployment=$IMAGE:v4
+msg
+msg check error:
+msg
+msg kubectl get pod
+msg 'NAME                         READY   STATUS             RESTARTS   AGE'
+msg 'hello-web-5fdd857868-4tbb5   0/1     ImagePullBackOff   0          3m42s'
+msg 'hello-web-779454fd45-4cmc8   1/1     Running            0          3m42s'
+msg 'hello-web-779454fd45-d9dzf   1/1     Running            0          3m42s'
+msg
+msg find error:
+msg
+msg kubectl describe pod hello-web-5fdd857868-4tbb5
+msg
+msg fix error:
+msg
+msg kubectl set image deployments/$deployment $deployment=$IMAGE:0.4
+msg
+msg kubectl get pod
+msg
+msg hit ENTER to continue
+read i
+
 
 msg delete service:
 msg
