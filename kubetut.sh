@@ -158,6 +158,17 @@ msg
 msg hit ENTER to continue
 read i
 
+msg scale the deployment to an specific size:
+msg
+msg kubectl scale deployment $deployment --replicas=20
+msg
+msg kubectl get pod
+msg
+msg kubectl get rs
+msg
+msg hit ENTER to continue
+read i
+
 hpa=hpa-$deployment
 
 msg create autoscaler:
