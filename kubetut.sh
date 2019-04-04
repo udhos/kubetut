@@ -17,7 +17,11 @@ run() {
 	msg run: "$@"
 }
 
+ZONE=us-central1-a
 IMAGE=docker.io/udhos/web-scratch:latest
+
+msg forcing ZONE=$ZONE
+msg forcing IMAGE=$IMAGE
 
 [ -n "$PROJECT" ] || die "missing env var PROJECT"
 [ -n "$ZONE" ] || die "missing env var ZONE"
@@ -72,7 +76,7 @@ read i
 
 deployment=hello-web
 
-cmd="kubectl run $deployment --image=$IMAGE --requests=cpu=100m --port 8080"
+cmd="kubectl run $deployment --image=$IMAGE --requests=cpu=50m --port 8080"
 #cmd="kubectl create deployment $deployment --image=$IMAGE"
 msg creating deployment:
 msg
@@ -149,6 +153,34 @@ msg
 msg kubectl get svc
 msg
 msg curl external_ip:port
+msg
+msg hit ENTER to continue
+read i
+
+hpa=hpa-$deployment
+
+msg create autoscaler:
+msg
+msg kubectl autoscale deployment $deployment --cpu-percent=50 --min=2 --max=10 --name=$hpa
+msg
+msg check:
+msg
+msg kubectl get pods
+msg kubectl get hpa
+msg
+msg send some load:
+msg
+msg 'while :; do curl external_ip:port; done'
+msg
+msg ab -l -c 200 -n 100000 external_ip:port/
+msg
+msg check load:
+msg
+msg kubectl get hpa --watch
+msg
+msg delete autoscaler:
+msg
+msg kubectl delete hpa $hpa
 msg
 msg hit ENTER to continue
 read i
