@@ -208,6 +208,23 @@ msg kubectl set image deployments/$deployment $deployment=$IMAGE:0.4
 msg
 msg kubectl get pod
 msg
+msg check rollout status:
+msg
+msg kubectl rollout status deployments/$deployment
+msg
+msg hit ENTER to continue
+read i
+
+msg you can undo a rollout
+msg
+msg check revisions:
+msg
+msg kubectl rollout history deployments
+msg
+msg 'rollback to specific revision 3 (default is 0 -- last revision)'
+msg
+msg kubectl rollout undo deployments/$deployment --to-revision=3
+msg
 msg hit ENTER to continue
 read i
 
