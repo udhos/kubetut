@@ -12,6 +12,10 @@ die() {
 	exit 1
 }
 
+ZONE=us-central1-a
+
+msg forcing ZONE=$ZONE
+
 [ -n "$ZONE" ] || die "missing env var ZONE"
 [ -n "$CLUSTER" ] || die "missing env var CLUSTER"
 
