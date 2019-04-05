@@ -43,6 +43,37 @@ msg
 msg hit ENTER to continue
 read i
 
+msg create a pod to use the pvc:
+msg 
+msg kubectl create -f pod-pvc1.yaml
+msg
+msg inspect the pod:
+msg
+msg kubectl get pod -oyaml
+msg
+msg hit ENTER to continue
+read i
+
+msg forward port 8000 to port 8080 in the pod:
+msg
+msg kubectl port-forward server-h66x6 8000:8080
+msg
+msg send request to the pod:
+msg
+msg curl localhost:8000/
+msg
+msg stop the port forwarding
+msg
+msg hit ENTER to continue
+read i
+
+msg delete pod:
+msg
+msg kubectl delete -f pod-pvc1.yaml
+msg 
+msg hit ENTER to continue
+read i
+
 msg delete pvc:
 msg
 msg kubectl delete pvc pvc1

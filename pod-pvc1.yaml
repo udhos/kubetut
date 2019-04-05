@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: server
+spec:
+  replicas: 1
+  selector:
+    role: server
+  template:
+    metadata:
+      labels:
+        role: server
+    spec:
+      containers:
+      - name: server
+        image: udhos/web-scratch:latest
+        volumeMounts:
+          - mountPath: /disk
+            name: pod-pvc1-volume-name
+      volumes:
+        - name: pod-pvc1-volume-name
+          persistentVolumeClaim:
+            claimName: pvc1
