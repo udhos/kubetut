@@ -23,7 +23,7 @@ msg kubectl get storageclass
 msg
 msg create storage class slow:
 msg
-msg kubectl apply -f storageclass-slow.yaml
+msg kubectl create -f storageclass-slow.yaml
 msg
 msg kubectl get storageclass
 msg
@@ -35,7 +35,7 @@ msg
 msg kubectl get pv
 msg kubectl get pvc
 msg
-msg kubectl apply -f pvc1.yaml
+msg kubectl create -f pvc1.yaml
 msg
 msg kubectl get pv
 msg kubectl get pvc
