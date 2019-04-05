@@ -173,7 +173,11 @@ hpa=hpa-$deployment
 
 msg create autoscaler:
 msg
+msg '# this version currently cant set the name'
 msg kubectl autoscale deployment $deployment --cpu-percent=50 --min=2 --max=10 --name=$hpa
+msg
+msg '# this version can set the name'
+msg kubectl apply -f hpa.yaml
 msg
 msg check:
 msg
