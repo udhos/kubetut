@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-scratch
+  labels:
+    app: web-scratch
+spec:
+  ports:
+  - port: 80
+    name: web
+  clusterIP: None
+  selector:
+    app: web-scratch
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: web
+spec:
+  serviceName: web-scratch
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-scratch
+  template:
+    metadata:
+      labels:
+        app: web-scratch
+    spec:
+      containers:
+      - name: web-scratch
+        #image: k8s.gcr.io/nginx-slim:0.8
+        image: udhos/web-scratch:latest
+        ports:
+        - containerPort: 80
+          name: web
+        volumeMounts:
+        - name: www
+          mountPath: /disk-stateful
+      initContainers:
+      - name: volume-mount-hack
+        image: busybox
+        command: ["sh", "-c", "chown -R 1000:1000 /disk-stateful"]
+        volumeMounts:
+        - name: www
+          mountPath: /disk-stateful
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+
