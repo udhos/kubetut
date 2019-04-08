@@ -64,7 +64,7 @@ msg kubectl delete pod -l app=web-scratch
 msg
 msg check the pods will be recreated:
 msg
-msg get pod -w -l app=web-scratch
+msg kubectl get pod -w -l app=web-scratch
 msg
 msg pods ordinals, hostnames, SRV records, and A record names not have not changed
 msg but the IP addresses associated with the Pods may have changed.
@@ -83,6 +83,27 @@ msg kubectl exec web-0 -- /go/bin/app -touch=/disk-stateful/version.txt -version
 msg kubectl exec web-1 -- /go/bin/app -touch=/disk-stateful/version.txt -version
 msg
 msg verify storage contents:
+msg
+msg kubectl port-forward web-0 8000:8080
+msg curl localhost:8000/www/disk-stateful/version.txt
+msg
+msg kubectl port-forward web-1 8000:8080
+msg curl localhost:8000/www/disk-stateful/version.txt
+msg
+msg now stop the port forwarding
+msg
+msg hit ENTER to continue
+read i
+
+msg delete all pods in the statefulset:
+msg
+msg kubectl delete pod -l app=web-scratch
+msg
+msg wait for all of the pods to transition to Running and Ready:
+msg
+msg kubectl get pod -w -l app=web-scratch
+msg
+msg again verify storage contents:
 msg
 msg kubectl port-forward web-0 8000:8080
 msg curl localhost:8000/www/disk-stateful/version.txt
