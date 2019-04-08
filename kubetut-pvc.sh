@@ -56,7 +56,7 @@ read i
 
 msg forward port 8000 to port 8080 in the pod:
 msg
-msg kubectl port-forward server-h66x6 8000:8080
+msg kubectl port-forward PUT_POD_NAME_HERE 8000:8080
 msg
 msg send request to the pod:
 msg
