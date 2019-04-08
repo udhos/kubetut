@@ -116,6 +116,25 @@ msg
 msg hit ENTER to continue
 read i
 
+msg scale up the number of replicas to 5:
+msg
+msg kubectl get pod -w -l app=web-scratch
+msg
+msg kubectl scale sts web --replicas=5
+msg
+msg scale down the number of replicas to 3:
+msg
+msg kubectl get pod -w -l app=web-scratch
+msg
+msg kubectl patch sts web -p '{"spec":{"replicas":3}}'
+msg
+msg examine pvcs:
+msg
+msg kubectl get pvc -l app=web-scratch
+msg
+msg hit ENTER to continue
+read i
+
 msg delete statefulset:
 msg
 msg kubectl delete -f statefulset.yaml
