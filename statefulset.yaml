@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-scratch
+  labels:
+    app: web-scratch
+spec:
+  ports:
+  - port: 80
+    name: web
+  clusterIP: None
+  selector:
+    app: web-scratch
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: web
+spec:
+  selector:
+    matchLabels:
+      app: web-scratch
+  serviceName: web-scratch
+  replicas: 3 # by default is 1
+  template:
+    metadata:
+      labels:
+        app: web-scratch # has to match .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: web-scratch
+        #image: k8s.gcr.io/nginx-slim:0.8
+        image: udhos/web-scratch:latest
+        ports:
+        - containerPort: 80
+          name: web
+        volumeMounts:
+        - name: www
+          mountPath: /disk-stateful
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: standard
+      resources:
+        requests:
+          storage: 1Gi
+
