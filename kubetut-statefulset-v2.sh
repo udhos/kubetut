@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/
+# https://kubernetes.io/docs/tutorials/stateful-application/basic-stateful-set/
 
 me=$(basename "$0")
 
