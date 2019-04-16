@@ -77,14 +77,15 @@ read i
 
 deployment=hello-web
 
-cmd="kubectl run $deployment --image=$IMAGE --requests=cpu=50m --port 8080"
 #cmd="kubectl create deployment $deployment --image=$IMAGE"
+#cmd="kubectl run $deployment --image=$IMAGE --requests=cpu=50m --port 8080"
+cmd="kubectl create -f deployment.yaml"
 msg creating deployment:
 msg
 msg $cmd
 msg
 run $cmd
-
+msg
 msg list deployments:
 msg
 msg kubectl get deployments
