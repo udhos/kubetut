@@ -145,6 +145,24 @@ msg
 msg hit ENTER to continue
 read i
 
+msg get current update strategy:
+msg "kubectl get sts web -o=jsonpath='{.spec.updateStrategy.type}'"
+msg
+msg set update strategy:
+msg "kubectl patch statefulset web -p '{\"spec\":{\"updateStrategy\":{\"type\":\"RollingUpdate\"}}}'"
+msg
+msg get current image:
+msg "kubectl get sts web -o=jsonpath='{.spec.template.spec.containers[0].image}'"
+msg
+msg watch the rollout:
+msg kubectl rollout status sts web
+msg
+msg change image:
+msg "kubectl patch statefulset web --type=json -p='[{\"op\": \"replace\", \"path\": \"/spec/template/spec/containers/0/image\", \"value\":\"udhos/web-scratch:0.4.1\"}]'"
+msg
+msg hit ENTER to continue
+read i
+
 msg delete statefulset:
 msg
 msg kubectl delete -f statefulset.yaml
