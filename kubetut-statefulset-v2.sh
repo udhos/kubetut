@@ -121,13 +121,22 @@ msg scale up the number of replicas to 5:
 msg
 msg kubectl get pod -w -l app=web-scratch
 msg
+msg check number of replicas: 
+msg "kubectl get sts -o=jsonpath='{.items[0].spec.replicas}'"
+msg
 msg kubectl scale sts web --replicas=5
+msg
+msg check number of replicas: 
+msg "kubectl get sts -o=jsonpath='{.items[0].spec.replicas}'"
 msg
 msg scale down the number of replicas to 3:
 msg
 msg kubectl get pod -w -l app=web-scratch
 msg
-msg kubectl patch sts web -p '{"spec":{"replicas":3}}'
+msg "kubectl patch sts web -p '{\"spec\":{\"replicas\":3}}'"
+msg
+msg check number of replicas: 
+msg "kubectl get sts -o=jsonpath='{.items[0].spec.replicas}'"
 msg
 msg examine pvcs:
 msg
