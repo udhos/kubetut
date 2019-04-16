@@ -52,7 +52,7 @@ msg kubectl run -i --tty --image busybox:1.28 dns-test --restart=Never --rm
 msg
 msg then query the pods hostnames in the in-cluster DNS:
 msg
-msg # nslookup podName-index.serviceName:
+msg '# nslookup podName-index.serviceName:'
 msg nslookup web-0.web-scratch
 msg nslookup web-1.web-scratch
 msg
