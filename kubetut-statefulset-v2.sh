@@ -163,9 +163,38 @@ msg
 msg hit ENTER to continue
 read i
 
+msg you can delete the statefulset while preserving its pod
+msg by using a non-cascading delete:
+msg
+msg kubectl get pod -w -l app=web-scratch
+msg
+msg kubectl delete statefulset web --cascade=false
+msg
+msg delete the pod web-0:
+msg
+msg kubectl delete pod web-0
+msg
+msg verify that as the web sts has been deleted, web-0 has not been relaunched:
+msg
+msg kubectl get pod -l app=web-scratch
+msg
+msg recreate the statefulset:
+msg
+msg kubectl apply -f statefulset-v2.yaml
+msg
+msg hit ENTER to continue
+read i
+
 msg delete statefulset:
 msg
+msg without --cascade=false, the pods will be deleted.
+msg pods are terminated one at a time, with respect to the reverse order of their ordinal indices
+msg
+msg kubectl get pod -l app=web-scratch
+msg
 msg kubectl delete -f statefulset.yaml
+msg OR
+msg kubectl delete sts web
 msg
 msg kubectl get statefulset,pv,pvc,pod,service
 msg
