@@ -188,7 +188,8 @@ read i
 msg delete statefulset:
 msg
 msg without --cascade=false, the pods will be deleted.
-msg pods are terminated one at a time, with respect to the reverse order of their ordinal indices
+msg pods are terminated one at a time, with respect to the reverse order of their ordinal indices.
+msg cascading delete would not delete the Headless Service associated with the StatefulSet, if any.
 msg
 msg kubectl get pod -l app=web-scratch
 msg
