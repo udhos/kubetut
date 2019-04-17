@@ -193,9 +193,9 @@ msg cascading delete would not delete the Headless Service associated with the S
 msg
 msg kubectl get pod -l app=web-scratch
 msg
-msg kubectl delete -f statefulset.yaml
+msg 'kubectl delete -f statefulset-v2.yaml ;# will delete both sts (with pods) and service'
 msg OR
-msg kubectl delete sts web
+msg 'kubectl delete sts web ;# will delete sts (with pods) but not service'
 msg
 msg kubectl get statefulset,pv,pvc,pod,service
 msg
