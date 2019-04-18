@@ -58,12 +58,13 @@ msg verify cluster version:
 msg
 msg kubectl version
 msg
-msg hit ENTER to continue
-read i
-
 msg verify cluster details:
 msg
 msg kubectl cluster-info
+msg
+msg verify kubeconfig:
+msg
+msg 'kubectl config view ;# see also more ~/.kube/config'
 msg
 msg hit ENTER to continue
 read i
