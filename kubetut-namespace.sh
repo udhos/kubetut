@@ -38,7 +38,7 @@ msg
 msg hit ENTER to continue
 read i
 
-msg create a context pointing to cluster and namespace:
+msg "create a context 'clab' pointing to cluster and namespace:"
 msg 'current_context=$(kubectl config current-context)'
 msg 'echo $current_context'
 msg 'kubectl config set-context clab --namespace=lab --cluster=$current_context --user=$current_context'
